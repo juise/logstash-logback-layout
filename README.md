@@ -1,25 +1,18 @@
-# Logstash `json_event` pattern for log4j
+# Logstash `json_event` layout for logback
 
 [![Build Status](https://travis-ci.org/juise/logstash-logback-layout.svg)](https://travis-ci.org/juise/logstash-logback-layout)
 
 ## What is it?
-If you've used log4j, you know that certain appenders support things called _"Layouts"_. These are basically ways for you to control the formatting/rendering of a log event.
 
-There's a full list of formatting macros [here](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html) if you're curious.
+Based on [log4j-jsonevent-layout](https://github.com/logstash/log4j-jsonevent-layout) contributed by:
+ - @pyr (Pierre-Yves Ritschard)
+ - @StFS (Stefán Freyr Stefánsson)
+ - @looztra (Christophe Furmaniak)
+ - @astrochoupe
+ - @bfritz (Brad Fritz)
+ - @vrivellino (Vincent R.) 
 
-The PatternLayout an organization uses is pretty much begging to be bikeshedded. This library is essentially a "preformatted" layout that just happens to be the exact format that Logstash uses for `json_event`.
-
-## JSONEventLayout
-I recently came to a situation where I needed consider parsing some log4j-generated log events with Logstash. I had [another appender already](https://github.com/lusis/zmq-appender) but unfortunately the external dependency on ZeroMQ itself was a no go. So there were two options:
-
-- The experimental log4j input
-- file input
-
-The `log4j` input is actually pretty cool but needs to be refactored a little bit. It's based around log4j's SocketAppender which actually sends a serialized version of the LoggingEvent object over the wire. This has a few issues that are easily worked out but it's also experimental. I needed something a bit more stable. I also wanted to avoid any filtering if at all possible.
-
-Then I remembered the "hack" that would let you dump your [apache](http://cookbook.logstash.net/recipes/apache-json-logs/) or [nginx](http://blog.pkhamre.com/2012/08/23/logging-to-logstash-json-format-in-nginx/) logs in json_event format.
-
-I probably could have pulled this off using a complicated PatternLayout but decided I wanted a turnkey "solution" that did the work for you. That's what this library is.
+If you've use logback and maybe previously used log4j, you know that certain appenders support things called _"Layouts"_. These are basically ways for you to control the formatting/rendering of a log event.
 
 # Usage
 This is just a quick snippit of a `log4j.properties` file:
@@ -140,7 +133,7 @@ log4j.appender.RollingLog.layout.UserFields=foo:bar,baz:qux
 ## Command-line
 *Note that the command-line version will OVERRIDE any values specified in the config file should there be a key conflict!*
 
-`java -Dnet.logstash.log4j.JSONEventLayoutV1.UserFields="field3:prop3,field4:prop4" -jar .....`
+`java -Dnet.logstash.logback.JSONEventLayoutV1.UserFields="field3:prop3,field4:prop4" -jar .....`
 
 A warning will be logged should you attempt to set values in both places.
 
