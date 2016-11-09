@@ -44,7 +44,7 @@ public class EventFormatter {
     private StackTraceElementProxy[] stackTraceElementProxy;
 
     public EventFormatter(ILoggingEvent loggingEvent) {
-        message = loggingEvent.getMessage();
+        message = loggingEvent.getFormattedMessage();
         timestamp = dateFormat(loggingEvent.getTimeStamp());
         sourceHost = new HostData().getHostName();
 

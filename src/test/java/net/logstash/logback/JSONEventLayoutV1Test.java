@@ -17,6 +17,7 @@ import org.slf4j.MDC;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class JSONEventLayoutV1Test {
@@ -222,4 +223,14 @@ public class JSONEventLayoutV1Test {
         System.clearProperty(JSONEventLayoutV1.ADDITIONAL_DATA_PROPERTY);
 
     }
+
+    @Test
+    public void testMessageWithArguments() {
+        logger.info("Test12: This is a message with {}", "arguments");
+        String message = appender.getMessages()[0];
+
+        Assert.assertTrue("Event is not valid JSON", JSONValue.isValidJsonStrict(message));
+        Assert.assertEquals("Test12: This is a message with arguments", ((Map)JSONValue.parse(message)).get("message"));
+    }
+
 }
