@@ -29,10 +29,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <ch.qos.logback.version>1.1.3</ch.qos.logback.version>
-        <net.minidev.version>1.1.1</net.minidev.version>
+        <ch.qos.logback.version>1.2.11</ch.qos.logback.version>
+        <net.minidev.version>2.4.8</net.minidev.version>
         <commons.lang.version>2.6</commons.lang.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.2</junit.version>
     </properties>
 
     <licenses>
